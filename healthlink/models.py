@@ -70,8 +70,7 @@ class DoctorProfile(models.Model):
   endereco_consultorio = models.OneToOneField(Endereco, on_delete=models.CASCADE)
   CRM = models.CharField(max_length=6)
   metodo_pagamento = models.ManyToManyField('MetodoPagamento')
-
-#metodo_pagamento = models.ManyToManyField('MetodoPagamento')
+  
   
 #Classe para método de pagamento
 class MetodoPagamento(models.Model):
