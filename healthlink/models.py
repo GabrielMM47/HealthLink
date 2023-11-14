@@ -1,7 +1,49 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
+
+# Classe UserManager Customizada
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+#Classe de customização do User padrão do django com informações comuns entre médicos e pacientes
+class CustomUser(AbstractBaseUser):
+  SEXO = [('M', 'Masculino'), ('F', 'Feminino')]
+
+  email = models.EmailField(unique=True)
+  nome_completo = models.CharField(max_length=255)
+  data_nascimento = models.DateField()
+  cpf = models.CharField(max_length=14)
+  sexo = models.CharField(max_length=1, choices=SEXO)
+  telefone = models.CharField(max_length=15)
+  
+  is_active = models.BooleanField(default=True)
+  is_staff = models.BooleanField(default=False)
+
+  USERNAME_FIELD = 'email'
+  objects = CustomUserManager()
+
+  def __str__(self):
+      return self.email
 
 #Classe Endereço
 class Endereco(models.Model):
@@ -15,43 +57,26 @@ class Endereco(models.Model):
   def __str__(self):
       return f'{self.rua}, {self.numero} - {self.bairro}, {self.cidade} - {self.estado}'
 
-
-#Classe Plano de Saúde
-class PlanoSaude(models.Model):
-  nome = models.CharField(max_length=255)
-
-  def __str__(self):
-      return self.nome
-
-#Classe decustomização do User padrão do django com informações comuns entre médicos e pacientes
-class CustomUser(AbstractBaseUser):
-  #email = models.EmailField(unique=True) -> Acho que o User padrão do django já pede email
-  nome_completo = models.CharField(max_length=255)
-  data_nascimento = models.DateField()
-  sexo = models.CharField(max_length=9, choices=[('Masculino', 'Masculino'), ('Feminino', 'Feminino')])
-  telefone = models.CharField(max_length=15)
-
-  is_active = models.BooleanField(default=True) #Não sei o motivo
-  is_staff = models.BooleanField(default=False) #Não sei o motivo
-  
-  #objects = UserManager() #Não sei o porque disso
-  
-  USERNAME_FIELD = 'email'
-  REQUIRED_FIELDS = ['nome_completo', 'data_nascimento', 'telefone']
-
-  def __str__(self):
-    return self.email
-
-
 #Classe para pacientes
 class PatientProfile(models.Model):
   user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
   endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
-  plano_saude = models.ForeignKey(PlanoSaude, on_delete=models.SET_NULL, blank=True, null=True)
+  plano_saude = models.CharField(max_length=255)
 
 
 #Classe para médicos
-class DoctorProfile(models.Model):
+class DoctorProfile(models.Model): 
   user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-  endereco_consultorio = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-  CRM = models.IntegerField(max_legnth=6)
+  endereco_consultorio = models.OneToOneField(Endereco, on_delete=models.CASCADE)
+  CRM = models.CharField(max_length=6)
+  metodo_pagamento = models.ManyToManyField('MetodoPagamento')
+
+#metodo_pagamento = models.ManyToManyField('MetodoPagamento')
+  
+#Classe para método de pagamento
+class MetodoPagamento(models.Model):
+  nome = models.CharField(max_length=50)
+  descricao = models.CharField(max_length=255)
+
+  def __str__(self):
+      return self.nome
