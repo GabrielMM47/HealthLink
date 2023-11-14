@@ -1,53 +1,79 @@
-
-.container {
-width: 100vw;
-height: 10vh;
-background: rgb(45, 121, 227);
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-}
-.box {
-width: 300px;
-height: 300px;
-background: #fff;
-}
 body {
-margin: 0px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #ffffff;
 }
-.centralizarSemFundo{
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
+
+header {
+  background-color: #000000;
+  height: 100px;
+  padding: 20px;
 }
-.mainmenubtn {
-    background-color: skyblue;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding:20px;
-    margin-top:20px;
+
+img {
+  width: 200px;
+  height: auto;
 }
-.mainmenubtn:hover {
-    background-color: blue;
-    }
-.dropdown {
-    position: relative;
-    display: inline-block;
+
+h1 {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
-.dropdown-child {
-    display: none;
-    background-color: skyblue;
-    min-width: 200px;
+
+h2 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
-.dropdown-child a {
-    color: blue;
-    padding: 20px;
-    text-decoration: none;
-    display: block;
+
+nav {
+  background-color: #ffffff;
+  height: 50px;
+  padding: 20px;
 }
-.dropdown:hover .dropdown-child {
-    display: block;
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+main {
+  width: 80%;
+  margin: 0 auto;
+}
+
+section {
+  padding: 20px;
+}
+
+h3 {
+  color: #000000;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #000000;
+  height: 50px;
+  padding: 20px;
 }
