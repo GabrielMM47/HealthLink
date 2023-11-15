@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # Create your models here.
 
@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
-            raise ValueError('The Email must be set')
+            raise ValueError('O email é obrigatório')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 #Classe de customização do User padrão do django com informações comuns entre médicos e pacientes
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
   SEXO = [('M', 'Masculino'), ('F', 'Feminino')]
 
   email = models.EmailField(unique=True)
@@ -38,8 +38,10 @@ class CustomUser(AbstractBaseUser):
   
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
+  is_superuser = models.BooleanField(default=False)
 
   USERNAME_FIELD = 'email'
+  
   objects = CustomUserManager()
 
   def __str__(self):
