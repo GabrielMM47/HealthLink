@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 #from django.contrib.auth.models import AbstractBaseUser
 #from django.contrib.auth import login, authenticate, logout
 from .forms import CustomUserForm, PatientProfileForm, DoctorProfileForm
-from django.contrib import messages
+from .models import CustomUser, PatientProfile, DoctorProfile
+
+
 # Create your views here.
 
 def home(request):
   return render(request, "home.html")
-
 
 
 def create_user(request):
@@ -17,28 +19,48 @@ def create_user(request):
 
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
-            new_user.set_password(user_form.cleaned_data['password'])
-            new_user.save()
+            password = request.POST.get('senha')
+            if password:
+                new_user.set_password(password)
+                new_user.save()  # Salvar o usuário após definir a senha
 
-            if user_type == 'patient':
-                profile_form = PatientProfileForm(request.POST, instance=new_user.patientprofile)
-            elif user_type == 'doctor':
-                profile_form = DoctorProfileForm(request.POST, instance=new_user.doctorprofile)
-            else:
-                messages.error(request, 'Tipo de usuário desconhecido.')
-                return redirect('home')
+                if user_type == 'patient':
+                    profile_form = PatientProfileForm(request.POST)
+                    if profile_form.is_valid():
+                        profile = profile_form.save(commit=False)
+                        profile.user = new_user
+                        profile.save()
+                        messages.success(request, 'Paciente registrado com sucesso!')
+                    else:
+                        messages.error(request, 'Erro no formulário de perfil do paciente.')
 
-            if profile_form.is_valid():
-                profile_form.save()
-                messages.success(request, 'Usuário criado com sucesso!')
-                return redirect('home')
+                elif user_type == 'doctor':
+                    profile_form = DoctorProfileForm(request.POST)
+                    if profile_form.is_valid():
+                        profile = profile_form.save(commit=False)
+                        profile.user = new_user
+                        profile.save()
+                        messages.success(request, 'Médico registrado com sucesso!')
+                    else:
+                        messages.error(request, 'Erro no formulário de perfil do médico.')
+
+                return redirect('home')  # Redirecionar para a home após o sucesso
             else:
-                messages.error(request, 'Erro no formulário de perfil. Por favor, corrija os erros abaixo.')
+                messages.error(request, 'A senha é obrigatória.')
         else:
-            messages.error(request, 'Erro no formulário de usuário. Por favor, corrija os erros abaixo.')
+            messages.error(request, 'Erro no formulário de usuário.')
 
     else:
         user_form = CustomUserForm()
-        profile_form = None
+        patient_profile_form = PatientProfileForm()
+        doctor_profile_form = DoctorProfileForm()
 
-    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'register.html', {
+        'user_form': user_form,
+        'patient_profile_form': patient_profile_form,
+        'doctor_profile_form': doctor_profile_form
+    })
+
+
+
+

@@ -33,6 +33,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
   cpf = models.CharField(max_length=14, null=True, blank=True)
   sexo = models.CharField(max_length=1, choices=SEXO, null=True, blank=True)
   telefone = models.CharField(max_length=15, null=True, blank=True)
+  estado = models.CharField(max_length=2, null=True, blank=True)
+  cidade = models.CharField(max_length=255, null=True, blank=True)
+  bairro = models.CharField(max_length=255, null=True, blank=True)
   
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
@@ -45,37 +48,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
   def __str__(self):
       return self.email
 
-#Classe Endereço
-class Endereco(models.Model):
-  estado = models.CharField(max_length=255)
-  cidade = models.CharField(max_length=255)
-  bairro = models.CharField(max_length=255)
-  rua = models.CharField(max_length=255)
-  numero = models.CharField(max_length=10)
-  complemento = models.CharField(max_length=255, blank=True, null=True)
-
-  def __str__(self):
-      return f'{self.rua}, {self.numero} - {self.bairro}, {self.cidade} - {self.estado}'
-
 #Classe para pacientes
 class PatientProfile(models.Model):
   user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-  endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
-  plano_saude = models.CharField(max_length=255)
+  plano_saude = models.CharField(max_length=3, choices=[('S', 'Sim'), ('N', 'Não')], null=True, blank=True)
 
 
 #Classe para médicos
 class DoctorProfile(models.Model): 
   user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-  endereco_consultorio = models.OneToOneField(Endereco, on_delete=models.CASCADE)
-  CRM = models.CharField(max_length=6)
-  metodo_pagamento = models.ManyToManyField('MetodoPagamento')
+  especialidade = models.CharField(max_length=255, null=True, blank=True)
+  CRM = models.CharField(max_length=6, null=True, blank=True)
+  aceita_plano = models.CharField(max_length=10, choices=[('S', 'Aceita'), ('N', 'Não aceita')], null=True, blank=True)
   
   
-#Classe para método de pagamento
-class MetodoPagamento(models.Model):
-  nome = models.CharField(max_length=50)
-  descricao = models.CharField(max_length=255, null=True, blank=True)
-
-  def __str__(self):
-      return self.nome
