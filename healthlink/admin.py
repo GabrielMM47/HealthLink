@@ -15,7 +15,7 @@ class DoctorProfileInline(admin.StackedInline):
     model = DoctorProfile
     can_delete = False
     verbose_name_plural = 'Perfil do Médico'
-    fields = ['especialidade', 'CRM', 'aceita_plano']
+    fields = ['especialidade', 'crm', 'aceita_plano']
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
