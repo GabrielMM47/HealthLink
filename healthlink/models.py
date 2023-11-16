@@ -50,13 +50,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 #Classe para pacientes
 class PatientProfile(models.Model):
-  user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+  user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='patientprofile')
   plano_saude = models.CharField(max_length=3, choices=[('S', 'Sim'), ('N', 'Não')], null=True, blank=True)
 
 
 #Classe para médicos
 class DoctorProfile(models.Model): 
-  user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+  user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='doctorprofile')
   especialidade = models.CharField(max_length=255, null=True, blank=True)
   CRM = models.CharField(max_length=6, null=True, blank=True)
   aceita_plano = models.CharField(max_length=10, choices=[('S', 'Aceita'), ('N', 'Não aceita')], null=True, blank=True)
