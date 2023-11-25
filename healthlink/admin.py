@@ -63,8 +63,8 @@ class CustomUserAdmin(UserAdmin):
               output_field=IntegerField(),
           )
       ).order_by('custom_order', 'email')  # Ordena pelo campo 'custom_order', seguido de 'email'
-      print(qs.query)
-      print(list(qs))
+      #print(qs.query)
+      #print(list(qs))
       return qs
 
     def user_type_display(self, obj):
@@ -72,7 +72,7 @@ class CustomUserAdmin(UserAdmin):
             return 'Médico'
         elif hasattr(obj, 'patientprofile'):
             return 'Paciente'
-        return 'Usuário Comum'
+        return 'Administrador'
     user_type_display.short_description = 'Tipo de Usuário'
 
 admin.site.register(CustomUser, CustomUserAdmin)

@@ -36,13 +36,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
   estado = models.CharField(max_length=2, null=True, blank=True)
   cidade = models.CharField(max_length=255, null=True, blank=True)
   bairro = models.CharField(max_length=255, null=True, blank=True)
-  
+
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
   is_superuser = models.BooleanField(default=False)
 
   USERNAME_FIELD = 'email'
-  
+
   objects = CustomUserManager()
 
   def __str__(self):
@@ -60,5 +60,3 @@ class DoctorProfile(models.Model):
   especialidade = models.CharField(max_length=255, null=True, blank=True)
   crm = models.CharField(max_length=6, null=True, blank=True)
   aceita_plano = models.CharField(max_length=10, choices=[('S', 'Aceita'), ('N', 'Não aceita')], null=True, blank=True)
-  
-  

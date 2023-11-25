@@ -11,10 +11,15 @@ from .forms import CustomUserForm, PatientProfileForm, DoctorProfileForm
 def home(request):
   return render(request, "home.html")
 
+def sobre_nos(request):
+  return render(request, "sobrenos.html")
 
 def create_user(request):
   if request.method == 'POST':
       user_form = CustomUserForm(request.POST)
+      patient_profile_form = PatientProfileForm()
+      doctor_profile_form = DoctorProfileForm()
+    
       if user_form.is_valid():
           new_user = user_form.save(commit=False)
           new_user.set_password(user_form.cleaned_data['senha'])
@@ -77,4 +82,3 @@ def login_user(request):
 def logout_user(request):
   logout(request)
   return redirect("login")
-
