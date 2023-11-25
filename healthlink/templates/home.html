@@ -1,59 +1,135 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>HealthLink</title>
-  <link rel="stylesheet" href="static/css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Healthlink</title>
+  <link rel="stylesheet" href="static/css/home.css">
 </head>
-<body>
+
+</head>
+
+<body id="topo">
+
   <nav>
     <div class="padding-left">
-    <img src="static/imagens/logo-sem-fundo.png" alt="Logo HealthLink">
+      <a href="#topo"><img src="{% static 'imagens/logo-sem-fundo.png' %}" alt="Logo HealthLink"></a>
     </div>
+
     <ul class="center">
-      <li><a style="color: white" href="#">Início</a></li>
-      <li><a style="color: white" href="#">Chat</a></li>
-      <li><a style="color: white" href="#">Como funciona</a></li>
-      <li><a style="color: white" href="#">Sobre nós</a></li>
+      <br>
+      <li><a style="color: white" href="#topo">Início</a></li>
+      <li><a style="color: white" href="#">Chatbot</a></li>
+      <li><a style="color: white" href="#como_funciona">Como funciona</a></li>
+      <li><a style="color: white" href="sobrenos">Sobre nós</a></li>
     </ul>
+
     <ul>
-      <li><a style="color: white" href="/users/login">Login</a></li>
-      <li><a style="color: white" href="/users/">Cadastro</a></li>
+      <div class="user-actions">
+        <li><a href="/users/login"><button>Login</button></a></li>
+        <li><a href="/users/"><button>Cadastro</button></a></li>
+      </div>
     </ul>
+
   </nav>
 
+
+  
   <header>
-    <h1>HealthLink</h1>
-    <h2>O site que conecta você ao médico mais próximo da sua casa</h2>
+    <h1 class="centralizar">HealthLink</h1>
+    <h2 class="centralizar">O site que conecta você ao médico<br> mais próximo da sua casa</h2>
   </header>
 
+
+
+  
   <main>
-    <section>
-      <h3>Como funciona</h3>
-      <ol>
-        <li>Cadastre-se como médico ou paciente;</li><br>
-        <li>Converse com a nossa IA para descobrir qual tipo de médico você precisa;</li><br>
-        <li>Receba recomendações de médicos próximos e qualificados;</li><br>
-        <li>Escolha o médico ideal para você;</li><br>
-        <li>Agende sua consulta de forma conveninente;</li><br>
-        <li>Avalie sua experiência e contribua para melhorar nosso serviço.</li><br>
-      </ol>
+    
+    <section id="como_funciona">
+      <div class="title">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 style="color:black">Faça parte da HealthLink</h1>
+        <p>Siga nosso PASSO a PASSO e se torne membro da HEALTHLINK</p>
+      </div>
+  
+      <div class="timeline">
+  
+        <div class="checkpoint">
+            <div>
+              <h2 style="color:black">1. CADASTRO</h2>
+                <p style="color:black">Cadastre-se como médico ou paciente no canto superior direito, na opção cadastro. Entre
+                com seus dados no formulário.</p>
+            </div>
+        </div>
+        <div class="checkpoint">
+            <div>
+                <h2 style="color:black">2. INTELIGÊNCIA ARTIFICIAL</h2>
+                <p style="color:black">Converse com a nossa Inteligência Artificial para descobrir qual tipo de médico é
+                  adequado para você! Clique na opção "Chatbot", localizada no centro superior da página.</p>
+            </div>
+        </div>
+  
+        <div class="checkpoint">
+            <div>
+              <h2 style="color:black">3. ENCONTRE O MÉDICO </h2>
+              <p style="color:black">Receba recomendações de médicos próximos a você e escolha qual desses mais lhe satisfaz.
+              </p>
+            </div>
+        </div>
+  
+        <div class="checkpoint">
+            <div>
+              <h2 style="color:black">4. AGENDE </h2>
+              <p style="color:black">Agende sua consulta de forma conveninente.</p>
+            </div>
+        </div>
+  
+        <div class="checkpoint">
+            <div>
+              <h2 style="color:black">5. AVALIE </h2>
+              <p style="color:black">Avalie sua experiência e contribua para melhorar o serviço da HealthLink</p>
+            </div>
+        </div>     
     </section>
-    <section>
-      <h3>Contato</h3>
-      <p>Para mais informações, entre em contato conosco:</p>
-      <ul>
-        <li>Telefone: (11) 1234-5678</li>
-        <li>E-mail: contato@healthlink.com.br</li>
-        <li>Chat online</li>
-      </ul>
-    </section>
+    </div>
+      <section>
+        <p class="step-content" style="color:white">A HealthLink agradece a todos que escolheram nossa plataforma para
+          cuidar da sua saúde. Obrigado por confiar em nós para conectar você aos melhores profissionais médicos. Sua
+          saúde é nossa prioridade. Continuaremos trabalhando para oferecer a melhor experiência possível. Obrigado por
+          fazer parte da HealthLink! </p>
+      </section>
 
   </main>
 
+
   <footer>
-    <p style="color: white;">Copyright © 2023 HealthLink</p>
+    <div class="contact">
+      <h3 style="color: white">Contato</h3>
+      <ul>
+        <li>Telefone: +55 (11) 1234-5678</li>
+        <li>E-mail: contato@healthlink.com.br</li>
+        <li>Chat online</li>
+        <li> <a style="color: white" href="https://www.instagram.com/healthlink/" target="_blank">Instagram: @healthlink</a></li>
+      </ul>
+    </div>
+    <p>&copy; 2023 HealthLink</p>
   </footer>
+  <script>
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth'
+              });
+          });
+      });
+  </script>
 
 </body>
+
 </html>
