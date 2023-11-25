@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sobre Nós - HealthLink</title>
+  <link rel="stylesheet" href="{% static 'css/sobrenos.css' %}">
+</head>
+
+<body>
+  <nav>
+    <div class="padding-left">
+      <img src="{% static 'imagens/logo-sem-fundo.png' %}" alt="Logo HealthLink">
+    </div>
+    <ul class="center">
+      <li class=espacamento><a style="color: white" href="/">Início</a></li>
+      <li class=espacamento><a style="color: white" href="#">Chatbot</a></li>
+      <li class=espacamento><a style="color: white" href="#como_funciona">Como funciona</a></li>
+      <li class=espacamento><a style="color: white" href="/sobrenos">Sobre nós</a></li>
+    </ul>
+    <ul>
+      <li class=espacamento><a style="color: white" href="/users/login">Login</a></li>
+      <li class=espacamento><a style="color: white" href="/users/">Cadastro</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h3>Sobre Nós</h3>
+      <p>A HealthLink é um site criado com o propósito de otimizar, facilitar e melhorar o acesso ao atendimento médico de qualidade através do uso de uma inteligência artificial para conectar o paciente ao médico.</p>
+      <p>O nosso sistema, através da utilização da IA, realiza um pré-diagnóstico do paciente e, baseando-se nas respostas obtidas, designa o atendimento ideal com um médico especialista na enfermidade, e de próxima localização do paciente.</p>
+      <h3>Sobre Nós: Integrantes</h3>
+      <p>Nós somos um quinteto de estudantes da Universidade PUC-Rio que motivados pela vontade de melhorar o acesso a saúde da população, decidimos criar um site, a fim de amenizar esse problema. O site se chama healthlink. O quinteto é composto pelos integrantes chamados: Victor de Castro Carneiro, Gabriel Martins, Rodrigo Dale, Gabriel Patricio e Pedro Henrique Martins. Além disso, nós estamos todos cursando engenharia, entretanto possuímos especializações diferentes, de forma que o nosso site possa ter variados pontos de vista na sua criação.</p>
+       <img class=tamanho src="{% static 'imagens/c644b64e-b297-4cb1-abc8-92e74438cfab.jpg' %}">
+       <img class=tamanho src="{% static 'imagens/ebaa1053-0f2c-493d-bc66-c3de7ab99976.jpg' %}">
+       <img class=tamanho src="{% static 'imagens/e3d55027-1986-4b29-9abd-46e40e89a484.jpg' %}">
+        <img class=tamanho src="{% static 'imagens/f2f427d2-6a34-443a-a514-e72520b08803.jpg' %}">
+         <img class=tamanho src="{% static 'imagens/eaf9949a-6c5a-4626-b461-4bb29d2b8f2c.jpg' %}">
+
+
+
+    </section>
+    <section>
+      <h3>Informações Adicionais</h3>
+      <ul>
+        <li>Criado em outubro de 2023</li>
+        <li>Startup ainda em desenvolvimento</li>
+        <li>Ideia criada, desenvolvida e elaborada por nós do 2º período</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p style="color: white;">Copyright © 2023 HealthLink</p>
+  </footer>
+
+</body>
+
+</html>
