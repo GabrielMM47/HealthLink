@@ -1,0 +1,179 @@
+body{
+   /*Inserir a foto aqui */
+   background: url('../imagens/imagem-homepage-2.png');
+   background-size: cover;
+   min-height: 100%;
+   overflow: hidden;
+}
+.hero{
+   height: 100%;
+   width: 100%;
+   position: absolute;
+   top: 5em;
+}
+
+.form-box{
+   width: 380px;
+   height: 1000px;
+   position: relative;
+   margin: 6% auto;
+   background-color: rgba(255, 255, 255, 0.105);
+   border: 1px solidrgba(255, 255, 255, 0.196);
+   backdrop-filter: blur(20px);
+   padding: 5px;
+   border-radius: 2em;
+   overflow: hidden;
+}
+.button-box{
+   width: 250px;
+   margin: 35px auto;
+   position: relative;
+   background-color: rgba(255, 255, 255, 0.105);
+   box-shadow: 0 0 25px 5px;
+   border-radius: 30px;
+}
+.toggle-btn{
+   padding: 10px 30px;
+   cursor: pointer;
+   background: transparent;
+   border: 0;
+   outline: none;
+   position: relative;
+   color: black;
+   font-weight: 400;
+   transition: 0.3s ease;
+}
+.toggle-btn:hover{
+   transform: scale(1.1);
+}
+#btn{/*qualquer coisa rever o background*/
+   top: 0;
+   left: 0;
+   position: absolute;
+   width: 110px;
+   height: 100%;
+   background: linear-gradient(to right, #ff105f, #ffad06);
+   border-radius: 30px;
+   transition: .5s;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 0 0 calc(50% - 10px); /* Define a largura para 50% menos a margem entre os campos */
+  margin-bottom: 10px; /* Espaço entre as linhas */
+}
+
+.input-group{
+   top: 180px;
+   position: relative;
+   width: 280px;
+   transition: .5s ease;
+}
+.input-field{
+   width: 100%; /* Faz com que o campo de input ocupe todo o espaço do .form-group */
+   padding: 10px;
+   margin: 5px 0;
+   border-left: 0;
+   border-top: 0;
+   border-right: 0;
+   border-bottom: 1px solid #999;
+   outline: none;
+   background: transparent;
+}
+.submit-btn{
+   width: 85%;
+   padding: 10px 30px;
+   cursor: pointer;
+   display: block;
+   margin: auto; 
+   color: black;
+   background: white;
+   border: 0;
+   outline: none;
+   border-radius: 30px;
+   border: 2px solid transparent;
+   transition: 0.3s ease;
+}
+.submit-btn:hover{
+   background-color: transparent;
+   color: white;
+   border: 2px solid white;
+}
+.check-box{
+   margin: 30px 10px 30px 0;
+}
+span{
+   color: #777;
+   font-size: 12 px;
+   bottom: 68px;
+   position: absolute;
+   color: white;
+}
+#medico{
+   left: 450px;
+}
+#paciente{
+   left: 450px;
+}
+input::placeholder{
+   color: white;
+}
+.terms{
+   color: white;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 120px; /* Ajuste a largura conforme necessário */
+    height: 34px; /* Ajuste a altura conforme necessário */
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background-color: #ccc; /* Cor de fundo */
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-left,
+.toggle-right {
+    z-index: 2;
+    color: black; /* Cor do texto */
+    font-weight: bold;
+}
+
+.toggle-handle {
+    position: absolute;
+    top: 2px; /* Ajuste o espaço no topo conforme necessário */
+    bottom: 2px;
+    left: 2px;
+    width: 50%; /* Ajuste a largura do handle para metade do toggle */
+    background-color: #fff; /* Cor de fundo do handle */
+    border-radius: 20px; /* Deixe o handle arredondado */
+    transition: 0.3s ease;
+    z-index: 1;
+}
+
+input:checked + .toggle-label .toggle-handle {
+    left: 50%; /* Mova o handle para o outro lado */
+}
+
+/* Estilo adicional para quando está selecionado Médico */
+input:checked + .toggle-label .toggle-left {
+    color: #000; /* Cor do texto quando ativo */
+}
+
+/* Estilo adicional para quando está selecionado Paciente */
+input:not(:checked) + .toggle-label .toggle-right {
+    color: #000; /* Cor do texto quando ativo */
+}

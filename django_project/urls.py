@@ -20,7 +20,8 @@ from healthlink import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
-    path('users/', views.create_user),
+    path('users/', views.create_user, name="cadastro"),
     path('users/login/', views.login_user, name="login"),
     path('users/logout/', views.logout_user, name="logout"),
+    path('sobrenos/', views.sobre_nos, name="sobre_nos"),
 ]

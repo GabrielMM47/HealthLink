@@ -6,40 +6,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Healthlink</title>
-  <link rel="stylesheet" href="static/css/home.css">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 </head>
 
-<body id="topo">
-
-  <nav>
-    <div class="padding-left">
-      <a href="#topo"><img src="{% static 'imagens/logo-sem-fundo.png' %}" alt="Logo HealthLink"></a>
-    </div>
-
-    <ul class="center">
-      <br>
-      <li><a style="color: white" href="#topo">Início</a></li>
-      <li><a style="color: white" href="#">Chatbot</a></li>
-      <li><a style="color: white" href="#como_funciona">Como funciona</a></li>
-      <li><a style="color: white" href="sobrenos">Sobre nós</a></li>
-    </ul>
-
-    <ul>
-      <div class="user-actions">
-        <li><a href="/users/login"><button>Login</button></a></li>
-        <li><a href="/users/"><button>Cadastro</button></a></li>
-      </div>
-    </ul>
-
-  </nav>
-
-
-  
+<body id="topo"> 
   <header>
-    <h1 class="centralizar">HealthLink</h1>
-    <h2 class="centralizar">O site que conecta você ao médico<br> mais próximo da sua casa</h2>
+    <nav>
+      <div class="padding-left">
+        <a href="#topo"><img src="{% static 'imagens/logo-sem-fundo.png' %}" alt="Logo HealthLink"></a>
+      </div>
+      <div class="navbar">
+        <ul class="user-actions">
+          <br>
+          <li><a href="#topo">Início</a></li>
+          <li><a href="#">Chatbot</a></li>
+          <li><a href="#como_funciona">Como funciona</a></li>
+          <li><a href="{% url 'sobre_nos' %}">Sobre nós</a></li>
+        </ul>
+      </div>
+      <ul>
+        <div class="user-actions">
+          <li><a href="{% url 'login' %}"><button>Login</button></a></li>
+          <li><a href="{% url 'cadastro' %}"><button>Cadastro</button></a></li>
+        </div>
+      </ul>
+    </nav>
+    <div class="header-content">
+      <h1>HealthLink</h1>
+      <h2>O site que conecta você ao médico<br> mais próximo da sua casa</h2>
+      <a href="/users/" class="header-button">Comece agora</a>
+      <a href="#como_funciona" class="icon-button" id="down-arrow">
+        <i class="fas fa-arrow-down"></i>
+      </a>
+    </div>
   </header>
 
 
@@ -47,13 +49,9 @@
   
   <main>
     
-    <section id="como_funciona">
+    <section id="como_funciona" class="conteudo-da-secao">
       <div class="title">
-        <br>
-        <br>
-        <br>
-        <br>
-        <h1 style="color:black">Faça parte da HealthLink</h1>
+        <h1>Como funciona?</h1>
         <p>Siga nosso PASSO a PASSO e se torne membro da HEALTHLINK</p>
       </div>
   
@@ -94,15 +92,23 @@
               <h2 style="color:black">5. AVALIE </h2>
               <p style="color:black">Avalie sua experiência e contribua para melhorar o serviço da HealthLink</p>
             </div>
-        </div>     
+        </div>   
+        
+        <div class="botao-container">
+          <a href="/users/" class="botao">Comece agora</a>
+          <a href="#topo" class="icon-button static-arrow-up">
+            <i class="fas fa-arrow-up"></i>
+          </a>
+        </div>
     </section>
     </div>
-      <section>
-        <p class="step-content" style="color:white">A HealthLink agradece a todos que escolheram nossa plataforma para
-          cuidar da sua saúde. Obrigado por confiar em nós para conectar você aos melhores profissionais médicos. Sua
-          saúde é nossa prioridade. Continuaremos trabalhando para oferecer a melhor experiência possível. Obrigado por
-          fazer parte da HealthLink! </p>
-      </section>
+
+    <section>
+      <p class="step-content" style="color:white">A HealthLink agradece a todos que escolheram nossa plataforma para
+        cuidar da sua saúde. Obrigado por confiar em nós para conectar você aos melhores profissionais médicos. Sua
+        saúde é nossa prioridade. Continuaremos trabalhando para oferecer a melhor experiência possível. Obrigado por
+        fazer parte da HealthLink! </p>
+    </section>
 
   </main>
 
@@ -119,15 +125,40 @@
     </div>
     <p>&copy; 2023 HealthLink</p>
   </footer>
+
   <script>
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-              e.preventDefault();
-              document.querySelector(this.getAttribute('href')).scrollIntoView({
-                  behavior: 'smooth'
-              });
-          });
-      });
+    // Calcula a altura da navbar
+    var navbarHeight = document.querySelector('nav').offsetHeight;
+  
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            var targetId = this.getAttribute('href');
+            var target = document.querySelector(targetId);
+            
+            // Calcula a posição do elemento e ajusta com a altura da navbar
+            var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+  
+            // Faz a rolagem suave para a posição calculada
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Quando o usuário faz scroll na página, executa a função
+    window.onscroll = function() {
+      const header = document.querySelector('nav'); // Selecione sua navbar com o seletor correto
+      const fixedNav = header.offsetTop; // Defina o ponto de scroll para ativar o efeito
+
+      if (window.pageYOffset > fixedNav) {
+        header.classList.add("navbar-dark"); // Adiciona a classe quando passa o ponto de scroll
+      } else {
+        header.classList.remove("navbar-dark"); // Remove a classe quando retorna ao topo
+      }
+    };
+    
   </script>
 
 </body>
